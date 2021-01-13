@@ -13,60 +13,77 @@
 */
 
 const container = document.getElementById('container');
-//const gridElement = document.createElement("div");
-let size; //= 16;
+
+let size;
+let xPad, yPad;
+
+
+
 function makeRows(rows, cols) {
+ 
   size = prompt("Board Size: ");
+  size = parseInt(size);
+ 
+  xPad = (755-(size+size+1))/(size*2);
+  yPad = (755-(size+size+1))/(size*2);
+
+  xPad = Math.round(xPad);
+  yPad = Math.round(yPad);
+
   while (container.lastChild){  //delete child elements if they exist so as to clear the grid;
     container.removeChild(container.lastChild);
   };
   container.style.setProperty('--grid-rows', size);
   container.style.setProperty('--grid-cols', size);
-  if (size > 16){
-    for (c = 0; c < (size * size); c++) {
-      let cell = document.createElement("div");
-      cell.innerText = (c + 1);
-      cell.id = (c+1);
-      cell.addEventListener("mouseover",changeColor);
-      container.appendChild(cell).className = "grid-item-large";      
-    };
-  }
-  else{
+
+  
   for (c = 0; c < (size * size); c++) {
     let cell = document.createElement("div");
-    cell.innerText = (c + 1);
+
     cell.id = (c+1);
     cell.addEventListener("mouseover",changeColor);
+    cell.style.paddingTop = yPad+"px";
+    cell.style.paddingBottom = yPad+"px";
+    cell.style.paddingLeft = xPad+"px";
+    cell.style.paddingRight = xPad+"px";
+    cell.style.minHeight = .1 + "px";
+    cell.style.minWidth = .1 + "px";
+  
     container.appendChild(cell).className = "grid-item";      
   };
-}
 };
   
 function clearBoard(e){
-  //window.location.reload();
-  //const board = document.getElementsByClassName("grid-item");
-  //board.style.backgroundColor = "white";
-  while (container.lastChild){
+  
+  xTotal = (755-(size+size+1))/(size*2);
+  yTotal = (755-(size+size+1))/(size*2);
+  xPad = xTotal;
+  yPad = yTotal;
+  xPad = Math.round(xPad);
+  yPad = Math.round(yPad);
+
+  while (container.lastChild){  //delete child elements if they exist so as to clear the grid;
     container.removeChild(container.lastChild);
   };
-  if (size > 16){
-    for (c = 0; c < (size * size); c++) {
-      let cell = document.createElement("div");
-      cell.innerText = (c + 1);
-      cell.id = (c+1);
-      cell.addEventListener("mouseover",changeColor);
-      container.appendChild(cell).className = "grid-item-large";      
-    };
-  }
-  else{
-  for (c = 0; c < (size * size); c++) {
+  container.style.setProperty('--grid-rows', size);
+  container.style.setProperty('--grid-cols', size);
+
+  
+  for (c = 0; c < (size * size); c++) {   //find total number of grid items and create the correct amount of <div>'s in css grid format
     let cell = document.createElement("div");
-    cell.innerText = (c + 1);
+
     cell.id = (c+1);
     cell.addEventListener("mouseover",changeColor);
-    container.appendChild(cell).className = "grid-item";      
+    cell.style.paddingTop = yPad+"px";
+    cell.style.paddingBottom = yPad+"px";
+    cell.style.paddingLeft = xPad+"px";
+    cell.style.paddingRight = xPad+"px";
+    cell.style.minHeight = .1 + "px";
+    cell.style.minWidth = .1 + "px";
+
+    container.appendChild(cell).className = "grid-item";  
+      
   };
-}
 }
 
 function changeColor(e){
@@ -81,9 +98,6 @@ clearBtn.addEventListener("click", clearBoard);
 
 const sizeBtn = document.getElementById('boardSize');
 sizeBtn.addEventListener("click", makeRows);
-
-//makeRows(16, 16);
-//setTimeout(function(){makeRows(size,size);},2000);
 
 function getID(){
     let e = document.getElementById(this).setAttribute('background-color','black');

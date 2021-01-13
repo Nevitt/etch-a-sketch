@@ -5,29 +5,33 @@
   .inline{
     float:inline-start;
   }
+  .grid{
+    width: 755px;
+    height: 755px;
+    position: relative;
+    display: block;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+    
+  }
   #container {
     display: grid;
-    grid-gap: 2px;
-    grid-template-rows: repeat(var(--grid-rows), 1fr, auto-fill);
-    grid-template-columns: repeat(var(--grid-cols), 1fr);
+    grid-gap: .1px;
+    grid-template-columns: repeat(var(--grid-cols), 0fr);
+    grid-template-rows: repeat(var(--grid-rows), 0fr );
+    margin-top: 3px;
     max-width: 100%;
     width: 750px;
     height: 750px;
   }
   
   .grid-item {
-    padding: 13px 10px 10px 10px;
-    border: 1px solid #ddd;
-    text-align: center;
-  }
-
-  .grid-item-large{
-    padding: 2px 2px 2px 2px;
     border: 1px solid #ddd;
     text-align: center;
   }
 
   .grid-item:hover{
-    transform: scale(1.35);
+    transform: scale(1.3);
     
   }
